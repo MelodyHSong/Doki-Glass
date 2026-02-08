@@ -13,7 +13,7 @@ Welcome to **Doki-Glass**! This project is a lightweight, configurable utility d
 
 | Version | Status | Key Changes |
 | :--- | :--- | :--- |
-| **v1.2.0a** | **Latest** | Triple-key hotkeys, Auto-Hunter Dialog, and Steam/SDL crash protection. |
+| **v1.2.0a** | **Latest** | **Win + Shift** Hotkeys, Auto-Hunter Dialog, and Steam/SDL crash protection. |
 | **v1.0.0a** | Stable/Alpha | Initial release with JSON config, Inno Setup installer, and basic hotkeys. |
 | **v0.5.0INDEV** | Indev | Migration to native Win32 API and Registry-based startup management. |
 
@@ -42,9 +42,9 @@ Doki-Glass runs silently in the background. It monitors your system and applies 
 * **Auto-Hunter:** Identify new windows and add them to your targets with a single click.
 
 ### Hotkeys
-To avoid conflicts with development tools and creative software, we use triple-key combinations:
-* `Ctrl + Alt + G`: **Toggle** the transparency logic on or off.
-* `Ctrl + Alt + C`: **Class Hunter** — Identifies the focused window, copies the class name, and offers to add it to your config automatically.
+To ensure maximum compatibility with creative suites and IDEs, we use the Windows "Hyper" combo:
+* `Win + Shift + G`: **Toggle** the transparency logic on or off.
+* `Win + Shift + C`: **Class Hunter** — Identifies the focused window and offers to add it to your config automatically.
 
 ### Default Targets
 * **File Explorer** (`CabinetWClass`)

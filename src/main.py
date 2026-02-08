@@ -69,20 +69,22 @@ def apply_glass(hwnd, lparam):
 if __name__ == "__main__":
     manage_startup(config.get("run_at_startup", True))
     
-    MODIFIERS = win32con.MOD_CONTROL | win32con.MOD_ALT
+    # NEW MODIFIERS: Windows Key + Shift
+    MODIFIERS = win32con.MOD_WIN | win32con.MOD_SHIFT
     
-    # Unregister any existing hotkeys
+    # Force clear any previous registrations
     win32gui.UnregisterHotKey(None, HOTKEY_TOGGLE_ID)
     win32gui.UnregisterHotKey(None, HOTKEY_HUNTER_ID)
     
-    # Register Hotkeys with verification
     try:
-        h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) # G
-        h2 = win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, MODIFIERS, 0x43) # C
+        # Registering Win + Shift + G (0x47) and Win + Shift + C (0x43)
+        h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) 
+        h2 = win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, MODIFIERS, 0x43)
+        
         if not h1 or not h2:
-            raise RuntimeError("One or more hotkeys failed to register.")
+            raise RuntimeError("Windows blocked the Win+Shift+G/C combination.")
     except Exception as e:
-        win32api.MessageBox(0, f"Hotkey Registration Failed:\n{e}", APP_NAME, win32con.MB_ICONERROR)
+        win32api.MessageBox(0, f"Hotkey Registration Failed:\n{e}\n\nTry running as Admin or checking PowerToys settings.", APP_NAME, win32con.MB_ICONERROR)
         sys.exit(1)
 
     try:

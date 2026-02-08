@@ -28,7 +28,7 @@ Windows 11 is beautiful, but some apps just don't want to join the "Glass" party
 
 ### ✨ Highlights
 * **Zero Bloat:** Built with Python and Win32, it runs light and fast in the background.
-* **Hotkeys:** `Ctrl + Alt + G` to toggle, `Ctrl + Alt + C` to hunt for new windows.
+* **Stable Hotkeys:** `Win + Shift + G` to toggle, `Win + Shift + C` to hunt.
 * **Auto-Hunter:** Identify any window and add it to your config with a single click.
 * **Steam Ready:** Custom "Ghost Handle" protection ensures a crash-free experience with dynamic apps.
 
