@@ -71,6 +71,10 @@ if __name__ == "__main__":
     
     MODIFIERS = win32con.MOD_CONTROL | win32con.MOD_ALT
     
+    # Unregister any existing hotkeys
+    win32gui.UnregisterHotKey(None, HOTKEY_TOGGLE_ID)
+    win32gui.UnregisterHotKey(None, HOTKEY_HUNTER_ID)
+    
     # Register Hotkeys with verification
     try:
         h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) # G
