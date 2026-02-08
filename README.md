@@ -10,14 +10,13 @@ Welcome to **Doki-Glass**! This project is a lightweight, configurable utility d
 
 To use the pre-built version, you just need Windows 11. If you are building from source, you will need:
 * **Python 3.12+**
-* **Administrative Privileges** (for certain system windows)
+* **Administrative Privileges** (for installation into Program Files)
 * **Hardware Acceleration Off** (specifically for Chromium-based browsers like Opera GX)
 
 ### Quick Install
 
-If you just want the app running:
-1. **Download:** Grab the latest `Doki-Glass-Setup.exe` from the [Releases](https://github.com/MelodyHSong/Doki-Glass/releases) page.
-2. **Install:** Run the setup.
+1. **Download:** Grab the latest `Doki-Glass-Installer.exe` from the [Releases](https://github.com/MelodyHSong/Doki-Glass/releases) page.
+2. **Install:** Run the setup. It will handle the startup registry keys for you.
 3. **Configure:** Find your settings at `%APPDATA%\Doki-Glass\config.json`.
 
 ---
@@ -28,33 +27,31 @@ Doki-Glass runs silently in the background. It monitors your system and applies 
 
 ### Features
 * **Auto-Glass:** Seamlessly makes new windows translucent.
-* **Smart Startup:** Control whether the app launches at boot directly via the config file.
+* **Smart Startup:** Control whether the app launches at boot via the `run_at_startup` setting in the config.
+* **Developer Hunter:** Export window class names directly to a file for easy configuration.
 * **JSON Config:** Change opacity (0-255) or target new apps without touching code.
 
 ### Hotkeys
 * `Alt + G`: **Toggle** the transparency logic on or off.
-* `Alt + C`: **Class Hunter** — Instantly identifies the internal name of the active window so you can add it to your config.
+* `Alt + C`: **Class Hunter** — Identifies the focused window and saves its details to `Documents/Doki-Glass Output/identified_class.txt`.
 
-### Config Options (`config.json`)
-* `alpha`: Set transparency (0 is invisible, 255 is solid).
-* `run_at_startup`: Set to `true` or `false` to toggle launch on Windows boot.
-* `targets`: A list of Window Class names to affect.
+### Default Targets
+* **File Explorer** (`CabinetWClass`)
+* **UWP Apps** (`ApplicationFrameWindow`) — Settings, Calculator, etc.
+* **Notepad** (`Notepad`)
+* **Chromium Browsers** (`Chrome_WidgetWin_1`) — Opera GX, Chrome, Brave.
 
 ---
 
 ## ☆ Development & Customization
 
-### Example Usage
+### Prerequisites
+* `pip install pywin32`
 
-To set up your development environment:
+### Build from Source
+To create your own standalone executable:
 ```powershell
-pip install pywin32 keyboard
-```
-
-To build your own standalone executable:
-
-```powershell
-pyinstaller --noconsole --onefile --name Doki-Glass src/main.py
+pyinstaller --noconsole --onefile --icon="assets/icon.ico" --name Doki-Glass src/main.py
 ```
 ## ☆ License
 This project is licensed under the MIT License. You are free to use, modify, and distribute this code in your own projects—just keep the headers intact!
