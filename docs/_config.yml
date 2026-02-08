@@ -1,0 +1,17 @@
+# ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+# ☆ Doki-Glass Site Configuration
+# ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+
+title: ☆ Doki-Glass ☆
+description: Clear windows, clear mind. Lightweight translucency for Windows 11.
+theme: jekyll-theme-cayman # This is a clean, modern theme that works well with buttons
+
+# Adding the download link directly to the header
+show_downloads: true
+google_analytics: # Add your ID here if you ever want to track visitors
+
+# Custom variables for the theme
+author: MelodyHSong
+github:
+  is_project_page: true
+  repository_url: https://github.com/MelodyHSong/Doki-Glass

@@ -1,6 +1,16 @@
+; ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+; ☆ Author: ☆ MelodyHSong ☆
+; ☆ Program: Doki-Glass v1.2.0a 
+; ☆ Language: Delphi
+; ☆ License: MIT
+; ☆ Date 2026-02-08
+; ☆ 
+; ☆ Description: Inno Configuration
+; ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+
 [Setup]
 AppName=Doki-Glass
-AppVersion=1.0.0a
+AppVersion=1.2.0a
 AppPublisher=MelodyHSong
 AppPublisherURL=https://github.com/MelodyHSong/Doki-Glass
 DefaultDirName={autopf}\Doki-Glass

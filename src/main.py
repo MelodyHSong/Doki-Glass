@@ -1,143 +1,123 @@
 # ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
 # ☆ Author: ☆ MelodyHSong ☆
-# ☆ Program: Doki-Glass v1.0.0a (Win32 Stable)
+# ☆ Program: Doki-Glass v1.2.0a 
 # ☆ Language: Python
 # ☆ License: MIT
-# ☆ Date 2026-08-02
+# ☆ Date 2026-02-08
 # ☆ 
-# ☆ Description: A lightweight utility to apply a glass-like transparency effect to specified windows on Windows OS.
+# ☆ Description: A lightweight utility to apply a glass-like transparency effect.
 # ☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
 
-import win32gui
-import win32con
-import win32api
-import time
-import json
-import os
-import winreg
-import sys
+import win32gui, win32con, win32api, win32clipboard
+import time, json, os, winreg, sys
 
-# Constants for File Management
 APP_NAME = "Doki-Glass"
+VERSION = "1.2.0a"
 CONFIG_DIR = os.path.join(os.environ['APPDATA'], APP_NAME)
 CONFIG_PATH = os.path.join(CONFIG_DIR, "config.json")
 
-# Unique IDs for Global Hotkeys
 HOTKEY_TOGGLE_ID = 1
 HOTKEY_HUNTER_ID = 2
 
 def load_config():
-    """Loads user settings or generates defaults."""
-    if not os.path.exists(CONFIG_DIR):
+    if not os.path.exists(CONFIG_DIR): 
         os.makedirs(CONFIG_DIR)
-    
     defaults = {
         "alpha": 215,
         "run_at_startup": True,
         "targets": ["CabinetWClass", "ApplicationFrameWindow", "Notepad", "Chrome_WidgetWin_1"]
     }
-    
     if not os.path.exists(CONFIG_PATH):
-        with open(CONFIG_PATH, 'w') as f:
+        with open(CONFIG_PATH, 'w') as f: 
             json.dump(defaults, f, indent=4)
         return defaults
-    
-    with open(CONFIG_PATH, 'r') as f:
+    with open(CONFIG_PATH, 'r') as f: 
         return json.load(f)
 
 def manage_startup(enable):
-    """Adds or removes the app from Windows Registry Startup."""
     key_path = r"Software\Microsoft\Windows\CurrentVersion\Run"
-
-    # Ensure path is quoted to handle potential spaces in directories
-
-    exe_path = f'"{os.path.realpath(sys.executable)}"'
-    
+    if getattr(sys, "frozen", False):
+        exe_path = f'"{os.path.realpath(sys.executable)}"'
+    else:
+        script_path = os.path.realpath(os.path.abspath(sys.argv[0]))
+        exe_path = f'"{os.path.realpath(sys.executable)}" "{script_path}"'
     try:
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, key_path, 0, winreg.KEY_ALL_ACCESS)
-        if enable:
+        if enable: 
             winreg.SetValueEx(key, APP_NAME, 0, winreg.REG_SZ, exe_path)
         else:
-            try:
-                winreg.DeleteValue(key, APP_NAME)
-            except FileNotFoundError:
-                pass 
+            try: winreg.DeleteValue(key, APP_NAME)
+            except: pass
         winreg.CloseKey(key)
-    except Exception:
-        pass # Silently fail if registry is locked/restricted
+    except: pass
 
 config = load_config()
 is_active = True
 
 def apply_glass(hwnd, lparam):
-    """Iterates through windows and applies the alpha-blending style."""
-    if not is_active:
-        return
-        
-    class_name = win32gui.GetClassName(hwnd)
-    if class_name in config["targets"]:
-        style = win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
-        if not (style & win32con.WS_EX_LAYERED):
-
-            # Apply WS_EX_LAYERED to allow transparency
-
-            win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, style | win32con.WS_EX_LAYERED)
-            win32gui.SetLayeredWindowAttributes(hwnd, 0, config["alpha"], win32con.LWA_ALPHA)
+    if not is_active: return
+    try:
+        class_name = win32gui.GetClassName(hwnd)
+        if class_name in config["targets"]:
+            style = win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
+            if not (style & win32con.WS_EX_LAYERED):
+                win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, style | win32con.WS_EX_LAYERED)
+                win32gui.SetLayeredWindowAttributes(hwnd, 0, config["alpha"], win32con.LWA_ALPHA)
+    except Exception:
+        pass 
 
 if __name__ == "__main__":
     manage_startup(config.get("run_at_startup", True))
     
-    # ☆ Register Native Hotkeys using win32gui ☆
-    # Alt (0x0001) + G (0x47) / C (0x43)
-    try:
-        win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, win32con.MOD_ALT, 0x47)
-        win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, win32con.MOD_ALT, 0x43)
-    except Exception as e:
-        win32api.MessageBox(0, f"Failed to register hotkeys: {e}", "Doki-Glass Error", win32con.MB_ICONERROR)
+    MODIFIERS = win32con.MOD_CONTROL | win32con.MOD_ALT
     
+    # Register Hotkeys with verification
+    try:
+        h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) # G
+        h2 = win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, MODIFIERS, 0x43) # C
+        if not h1 or not h2:
+            raise RuntimeError("One or more hotkeys failed to register.")
+    except Exception as e:
+        win32api.MessageBox(0, f"Hotkey Registration Failed:\n{e}", APP_NAME, win32con.MB_ICONERROR)
+        sys.exit(1)
+
     try:
         while True:
-
-            # Native Windows Message Loop
-            # This is non-blocking to allow the window enumeration to run
-
+            # Check for Windows Messages
             if win32gui.PeekMessage(None, 0, 0, win32con.PM_REMOVE)[0]:
                 msg = win32gui.GetMessage(None, 0, 0)
-                data = msg[1]
-                if data[1] == win32con.WM_HOTKEY:
-                    if data[2] == HOTKEY_TOGGLE_ID:
+                msg_data = msg[1]
+                
+                if msg_data[1] == win32con.WM_HOTKEY:
+                    if msg_data[2] == HOTKEY_TOGGLE_ID:
                         is_active = not is_active
                     
-                    elif data[2] == HOTKEY_HUNTER_ID:
+                    elif msg_data[2] == HOTKEY_HUNTER_ID:
                         hwnd = win32gui.GetForegroundWindow()
                         c_name = win32gui.GetClassName(hwnd)
-                        w_title = win32gui.GetWindowText(hwnd)
+                        prompt = f"Class: {c_name}\n\nAdd to config and copy to clipboard?"
                         
-                        # Use a path the app is allowed to write to
-                        # This saves to Documents/Doki-Glass Output
-                        docs_path = os.path.join(os.path.expanduser('~'), 'Documents')
-                        output_dir = os.path.join(docs_path, "Doki-Glass Output")
-                        
-                        if not os.path.exists(output_dir):
-                            os.makedirs(output_dir)
-                        
-                        output_file = os.path.join(output_dir, "identified_class.txt")
-                        
-                        with open(output_file, "a") as f: # Changed to 'a' to append instead of overwrite
-                            f.write(f"[{time.ctime()}] Title: {w_title} | Class: {c_name}\n")
-                        
-                        win32api.MessageBox(0, f"Saved to Documents/Doki-Glass Output", "Doki-Glass Hunter", win32con.MB_ICONINFORMATION)
+                        # Custom Logic for User Choice
+                        res = win32api.MessageBox(0, prompt, f"{APP_NAME} Hunter {VERSION}", win32con.MB_YESNOCANCEL | win32con.MB_ICONINFORMATION)
 
-                win32gui.TranslateMessage(data)
-                win32gui.DispatchMessage(data)
+                        if res in [win32con.IDYES, win32con.IDNO]:
+                            win32clipboard.OpenClipboard()
+                            win32clipboard.EmptyClipboard()
+                            win32clipboard.SetClipboardText(c_name)
+                            win32clipboard.CloseClipboard()
+                            
+                            if res == win32con.IDYES:
+                                if c_name not in config["targets"]:
+                                    config["targets"].append(c_name)
+                                    with open(CONFIG_PATH, 'w') as f:
+                                        json.dump(config, f, indent=4)
+                
+                win32gui.TranslateMessage(msg_data)
+                win32gui.DispatchMessage(msg_data)
 
-            # Check and apply glass effect to windows
-
+            # Apply the effect
             win32gui.EnumWindows(apply_glass, None)
-
-            time.sleep(0.5) # Balanced for responsiveness vs CPU usage
-            
+            time.sleep(0.5)
     finally:
-        # Clean up hotkeys on exit
         win32gui.UnregisterHotKey(None, HOTKEY_TOGGLE_ID)
         win32gui.UnregisterHotKey(None, HOTKEY_HUNTER_ID)

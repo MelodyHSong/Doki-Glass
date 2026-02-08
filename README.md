@@ -9,12 +9,20 @@ Welcome to **Doki-Glass**! This project is a lightweight, configurable utility d
 
 ---
 
+## ☆ Release History
+
+| Version | Status | Key Changes |
+| :--- | :--- | :--- |
+| **v1.2.0a** | **Latest** | Triple-key hotkeys, Auto-Hunter Dialog, and Steam/SDL crash protection. |
+| **v1.0.0a** | Stable/Alpha | Initial release with JSON config, Inno Setup installer, and basic hotkeys. |
+| **v0.5.0INDEV** | Indev | Migration to native Win32 API and Registry-based startup management. |
+
 ## ☆ Installation & Prerequisites
 
 To use the pre-built version, you just need Windows 11. If you are building from source, you will need:
 * **Python 3.12+**
-* **Administrative Privileges** (for installation into Program Files)
-* **Hardware Acceleration Off** (specifically for Chromium-based browsers like Opera GX)
+* **Administrative Privileges** are required for installation.
+* **Hardware Acceleration** should be disabled in Chromium browsers (Opera GX, Chrome) for the best effect.
 
 ### Quick Install
 
@@ -29,14 +37,14 @@ To use the pre-built version, you just need Windows 11. If you are building from
 Doki-Glass runs silently in the background. It monitors your system and applies transparency to supported windows as soon as they appear.
 
 ### Features
-* **Auto-Glass:** Seamlessly makes new windows translucent.
-* **Smart Startup:** Control whether the app launches at boot via the `run_at_startup` setting in the config.
-* **Developer Hunter:** Export window class names directly to a file for easy configuration.
-* **JSON Config:** Change opacity (0-255) or target new apps without touching code.
+* **Auto-Glass:** Instantly makes supported windows translucent.
+* **Smart Startup:** Toggle launch-at-boot via the `run_at_startup` config setting.
+* **Auto-Hunter:** Identify new windows and add them to your targets with a single click.
 
 ### Hotkeys
-* `Alt + G`: **Toggle** the transparency logic on or off.
-* `Alt + C`: **Class Hunter** — Identifies the focused window and saves its details to `Documents/Doki-Glass Output/identified_class.txt`.
+To avoid conflicts with development tools and creative software, we use triple-key combinations:
+* `Ctrl + Alt + G`: **Toggle** the transparency logic on or off.
+* `Ctrl + Alt + C`: **Class Hunter** — Identifies the focused window, copies the class name, and offers to add it to your config automatically.
 
 ### Default Targets
 * **File Explorer** (`CabinetWClass`)

@@ -16,5 +16,5 @@ config.json
 # Installer Output
 user_output/
 
-#Miscelaneous Files
-LICENSE.txt
+# Miscellaneous Files
+RELEASES.md
