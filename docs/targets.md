@@ -42,10 +42,12 @@ Most modern desktop apps (Discord, VS Code, Slack, Spotify) are built using Elec
 ### 👻 Ghost Windows
 Some apps (like Steam or Telegram) create temporary invisible windows. If Doki-Glass feels like it’s lagging when these apps open, don't worry! Version **1.2.0a** includes "Ghost Handle Protection" to ignore these invalid windows automatically.
 
+Use the **Class Hunter** (`Alt + PageDown`) to discover more!
+
 ## ☆ Troubleshooting Hotkeys
-If `Win + Shift + C` does not open the Hunter:
-1. **PowerToys Check:** Microsoft PowerToys uses this combo for the "Color Picker." You may need to disable the Color Picker in PowerToys settings to use the Doki-Glass Hunter.
-2. **Admin Mode:** Try running Doki-Glass as Administrator if Windows is blocking the hotkey registration.
+If the Hunter does not open:
+1. **Admin Mode:** Ensure Doki-Glass is running as Administrator.
+2. **Conflict Check:** Verify that other software (like AMD Adrenalin) isn't using the same keys.
 
 ### 🖼️ UWP / System Apps
 Apps like **Settings** or **Calculator** use the `ApplicationFrameWindow` class. These are handled natively, but because Windows manages their lifecycle strictly, you may occasionally need to refresh the effect by toggling `Ctrl + Alt + G`.

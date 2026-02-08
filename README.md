@@ -13,8 +13,8 @@ Welcome to **Doki-Glass**! This project is a lightweight, configurable utility d
 
 | Version | Status | Key Changes |
 | :--- | :--- | :--- |
-| **v1.2.0a** | **Latest** | **Win + Shift** Hotkeys, Auto-Hunter Dialog, and Steam/SDL crash protection. |
-| **v1.0.0a** | Stable/Alpha | Initial release with JSON config, Inno Setup installer, and basic hotkeys. |
+| **v1.2.0a** | **Latest** | **Alt + PgUp/Dn** Hotkeys, Admin Elevation, and registration ghost-fixing. |
+| **v1.0.0a** | Stable | Initial release with JSON config and basic hotkeys. |installer, and basic hotkeys. |
 | **v0.5.0INDEV** | Indev | Migration to native Win32 API and Registry-based startup management. |
 
 ## ☆ Installation & Prerequisites
@@ -42,9 +42,9 @@ Doki-Glass runs silently in the background. It monitors your system and applies 
 * **Auto-Hunter:** Identify new windows and add them to your targets with a single click.
 
 ### Hotkeys
-To ensure maximum compatibility with creative suites and IDEs, we use the Windows "Hyper" combo:
-* `Win + Shift + G`: **Toggle** the transparency logic on or off.
-* `Win + Shift + C`: **Class Hunter** — Identifies the focused window and offers to add it to your config automatically.
+We use "Safe Zone" hotkeys to ensure zero interference with AMD Software, PowerToys, or IDEs:
+* `Alt + PageUp`: **Toggle** the transparency logic on or off.
+* `Alt + PageDown`: **Class Hunter** — Identifies the focused window and offers to add it to your config.
 
 ### Default Targets
 * **File Explorer** (`CabinetWClass`)
@@ -62,8 +62,9 @@ To ensure maximum compatibility with creative suites and IDEs, we use the Window
 ### Build from Source
 To create your own standalone executable:
 ```powershell
-pyinstaller --noconsole --onefile --icon="assets/icon.ico" --name Doki-Glass src/main.py
+pyinstaller --noconsole --onefile --uac-admin --icon="assets/icon.ico" --name Doki-Glass src/main.py
 ```
+
 ## ☆ License
 This project is licensed under the MIT License. You are free to use, modify, and distribute this code in your own projects—just keep the headers intact!
 

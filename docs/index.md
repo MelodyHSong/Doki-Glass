@@ -27,11 +27,9 @@ Welcome to the home of **Doki-Glass**, a boutique Windows 11 utility created by 
 Windows 11 is beautiful, but some apps just don't want to join the "Glass" party. **Doki-Glass v1.2.0a** bridges that gap by using native Win32 API calls to inject transparency into your favorite tools—from **VS Code** to **Steam**.
 
 ### ✨ Highlights
-* **Zero Bloat:** Built with Python and Win32, it runs light and fast in the background.
-* **Stable Hotkeys:** `Win + Shift + G` to toggle, `Win + Shift + C` to hunt.
-* **Auto-Hunter:** Identify any window and add it to your config with a single click.
-* **Steam Ready:** Custom "Ghost Handle" protection ensures a crash-free experience with dynamic apps.
-
+* **Zero Bloat:** Built with Python and Win32.
+* **Stable Hotkeys:** `Alt + PageUp` to toggle, `Alt + PageDown` to hunt.
+* **Admin Ready:** Native elevation ensures system windows are supported.
 
 
 ## ☆ The "Doki" Philosophy
