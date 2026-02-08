@@ -69,17 +69,22 @@ def apply_glass(hwnd, lparam):
 if __name__ == "__main__":
     manage_startup(config.get("run_at_startup", True))
     
-    # NEW MODIFIERS: Windows Key + Shift
     MODIFIERS = win32con.MOD_WIN | win32con.MOD_SHIFT
     
-    # Force clear any previous registrations
-    win32gui.UnregisterHotKey(None, HOTKEY_TOGGLE_ID)
-    win32gui.UnregisterHotKey(None, HOTKEY_HUNTER_ID)
-    
+    # ☆ Wrap cleanup in try-except to prevent the 1419 error ☆
+    try:
+        win32gui.UnregisterHotKey(None, HOTKEY_TOGGLE_ID)
+    except:
+        pass
+        
+    try:
+        win32gui.UnregisterHotKey(None, HOTKEY_HUNTER_ID)
+    except:
+        pass
     try:
         # Registering Win + Shift + G (0x47) and Win + Shift + C (0x43)
-        h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) 
-        h2 = win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, MODIFIERS, 0x43)
+        h1 = win32gui.RegisterHotKey(None, HOTKEY_TOGGLE_ID, MODIFIERS, 0x47) # G for Glass Toggle
+        h2 = win32gui.RegisterHotKey(None, HOTKEY_HUNTER_ID, MODIFIERS, 0x43) # C for Class Hunter
         
         if not h1 or not h2:
             raise RuntimeError("Windows blocked the Win+Shift+G/C combination.")
