@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# PyInstaller & Build
+build/
+dist/
+*.spec
+
+# Local Configuration (Users will generate their own)
+config.json
+
+# Installer Output
+user_output/
