@@ -4,6 +4,9 @@
 
 Welcome to **Doki-Glass**! This project is a lightweight, configurable utility designed to enhance the aesthetics of your Windows 11 desktop. By applying a "Layered" window style to specific application classes, it gives your workspace a modern, see-through interface without the performance tax of heavy customization suites.
 
+<img width="1918" height="979" alt="image" src="https://github.com/user-attachments/assets/4609eafd-e05f-4c8d-ab4b-9508b8e47a1d" />
+
+
 ---
 
 ## ☆ Installation & Prerequisites
@@ -57,4 +60,5 @@ pyinstaller --noconsole --onefile --icon="assets/icon.ico" --name Doki-Glass src
 This project is licensed under the MIT License. You are free to use, modify, and distribute this code in your own projects—just keep the headers intact!
 
 *I’d tell a joke about glass, but I'm afraid it might be too transparent. — MelodyHSong*
+
 
