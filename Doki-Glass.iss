@@ -21,7 +21,7 @@ SolidCompression=yes
 OutputDir=user_output
 OutputBaseFilename=Doki-Glass-Installer
 SetupIconFile={#SourcePath}\assets\icon.ico
-LicenseFile={#SourcePath}\LICENSE.txt
+LicenseFile={#SourcePath}\docs\LICENSE.txt
 
 [Files]
 Source: "{#SourcePath}\dist\Doki-Glass.exe"; DestName: "Doki-Glass.exe"; DestDir: "{app}"; Flags: ignoreversion
