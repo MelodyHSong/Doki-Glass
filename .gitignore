@@ -17,7 +17,5 @@ config.json
 user_output/
 
 # Miscellaneous Files
-RELEASES.md
-DIAGNOSTIC_RUN.ps1
-core_engine.py
+Debug/
 

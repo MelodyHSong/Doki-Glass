@@ -6,29 +6,28 @@ Welcome to **Doki-Glass**! This project is a lightweight, configurable utility d
 
 <img width="1918" height="979" alt="image" src="https://github.com/user-attachments/assets/4609eafd-e05f-4c8d-ab4b-9508b8e47a1d" />
 
-
 ---
 
 ## ☆ Release History
 
 | Version | Status | Key Changes |
 | :--- | :--- | :--- |
-| **v1.2.0a** | **Latest** | **Alt + PgUp/Dn** Hotkeys, Admin Elevation, and registration ghost-fixing. |
-| **v1.0.0a** | Stable | Initial release with JSON config and basic hotkeys. |installer, and basic hotkeys. |
-| **v0.5.0INDEV** | Indev | Migration to native Win32 API and Registry-based startup management. |
+| **v1.3.0a** | **Latest** | **Threaded Listener**, Alt + O Config Hotkey, and Error 1409 suppression. |
+| **v1.2.0a** | DEPRECATED | Alt + PgUp/Dn Hotkeys, Admin Elevation, and registration ghost-fixing. |
+| **v1.0.0a** | Legacy | Initial release with JSON config and basic hotkeys. |
 
 ## ☆ Installation & Prerequisites
 
 To use the pre-built version, you just need Windows 11. If you are building from source, you will need:
 * **Python 3.12+**
-* **Administrative Privileges** are required for installation.
+* **Administrative Privileges** are required (Doki-Glass handles elevation before the first-run prompt).
 * **Hardware Acceleration** should be disabled in Chromium browsers (Opera GX, Chrome) for the best effect.
 
 ### Quick Install
 
 1. **Download:** Grab the latest `Doki-Glass-Installer.exe` from the [Releases](https://github.com/MelodyHSong/Doki-Glass/releases) page.
 2. **Install:** Run the setup. It will handle the startup registry keys for you.
-3. **Configure:** Find your settings at `%APPDATA%\Doki-Glass\config.json`.
+3. **Configure:** Find your settings at `%APPDATA%\Doki-Glass\config.json` or use the dedicated hotkey.
 
 ---
 
@@ -39,12 +38,14 @@ Doki-Glass runs silently in the background. It monitors your system and applies 
 ### Features
 * **Auto-Glass:** Instantly makes supported windows translucent.
 * **Smart Startup:** Toggle launch-at-boot via the `run_at_startup` config setting.
-* **Auto-Hunter:** Identify new windows and add them to your targets with a single click.
+* **Multi-Threaded Listener:** Hotkeys now run on a dedicated background thread for maximum responsiveness.
+* **Crash Prevention:** Includes `safe_register` logic to ignore Error 1409 if hotkeys are already in use.
 
 ### Hotkeys
 We use "Safe Zone" hotkeys to ensure zero interference with AMD Software, PowerToys, or IDEs:
 * `Alt + PageUp`: **Toggle** the transparency logic on or off.
 * `Alt + PageDown`: **Class Hunter** — Identifies the focused window and offers to add it to your config.
+* `Alt + O`: **Open Config** — Instantly opens your `config.json` in your default text editor.
 
 ### Default Targets
 * **File Explorer** (`CabinetWClass`)
@@ -66,8 +67,8 @@ pyinstaller --noconsole --onefile --uac-admin --icon="assets/icon.ico" --name Do
 ```
 
 ## ☆ License
+
 This project is licensed under the MIT License. You are free to use, modify, and distribute this code in your own projects—just keep the headers intact!
 
+
 *I’d tell a joke about glass, but I'm afraid it might be too transparent. — MelodyHSong*
-
-

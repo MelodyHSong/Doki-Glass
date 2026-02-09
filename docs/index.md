@@ -14,31 +14,23 @@ description: Clear windows, clear mind. A lightweight translucency utility for W
 
 Welcome to the home of **Doki-Glass**, a boutique Windows 11 utility created by **MelodyHSong**. This tool is designed for developers, artists, and aesthetic enthusiasts who want a modern, see-through workspace without the heavy performance cost of traditional skinning suites.
 
-
-
 ## ☆ Quick Navigation
 
 [**🚀 Get Started**](https://github.com/MelodyHSong/Doki-Glass#installation--prerequisites) • [**🎯 Target Gallery**](targets) • [**🐛 Report a Quirk**](https://github.com/MelodyHSong/Doki-Glass/issues)
 
-
-
 ## ☆ Why Doki-Glass?
 
-Windows 11 is beautiful, but some apps just don't want to join the "Glass" party. **Doki-Glass v1.2.0a** bridges that gap by using native Win32 API calls to inject transparency into your favorite tools—from **VS Code** to **Steam**.
+Windows 11 is beautiful, but some apps just don't want to join the "Glass" party. **Doki-Glass v1.3.0a** bridges that gap by using native Win32 API calls to inject transparency into your favorite tools—from **VS Code** to **Steam**.
 
 ### ✨ Highlights
 * **Zero Bloat:** Built with Python and Win32.
-* **Stable Hotkeys:** `Alt + PageUp` to toggle, `Alt + PageDown` to hunt.
+* **Stable Hotkeys:** `Alt + PageUp` (Toggle), `Alt + PageDown` (Hunt), and `Alt + O` (Config).
+* **Multi-Threaded Performance:** Background processing ensures your UI stays snappy.
 * **Admin Ready:** Native elevation ensures system windows are supported.
-
 
 ## ☆ The "Doki" Philosophy
 
-
 Useful tools, very wow, much cute, very Doki~
-
-
-
 
 ## ☆ Join the Collection
 
